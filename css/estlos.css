@@ -1,0 +1,307 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: 'Inter', sans-serif; /* Usar fuente Inter o una genérica */
+    background-color: #f0f2f5; /* Fondo más suave */
+    color: #343a40; /* Color de texto principal */
+    line-height: 1.6;
+    display: flex; /* Usar flexbox para centrar el contenido verticalmente */
+    flex-direction: column;
+    min-height: 100vh; /* Asegurar que el body ocupe al menos el 100% del viewport height */
+    margin: 0; /* Eliminar margen por defecto del body */
+}
+
+/* Contenedor principal para centrar el contenido */
+.container {
+    flex-grow: 1; /* Permitir que el contenedor crezca para ocupar el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente el contenido del contenedor */
+    padding: 30px 15px; /* Espacio superior e inferior para el contenido, con padding lateral */
+    width: 100%; /* Asegurar que el contenedor ocupe todo el ancho */
+    max-width: 1200px; /* Limitar el ancho máximo para una mejor legibilidad en pantallas grandes */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ajuste para el contenido dentro del contenedor para que ocupe el ancho completo */
+.container > .row,
+.container > h1,
+.container > form,
+.container > table,
+.dataTables_wrapper { /* Añadido dataTables_wrapper para asegurar que los controles también se ajusten */
+    width: 100%; /* Asegurar que los elementos de nivel superior dentro del contenedor ocupen todo el ancho */
+    max-width: 100%; /* Limitar el ancho máximo para una mejor legibilidad en pantallas grandes */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Estilos para la barra de navegación */
+.navbar {
+    border-radius: 0 0 10px 10px; /* Bordes redondeados en la parte inferior */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra más pronunciada */
+    background-color: #2c3e50 !important; /* Un azul oscuro más profundo */
+    width: 100%; /* Asegurar que la barra de navegación ocupe todo el ancho */
+}
+
+.navbar-nav {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start; /* Alinea los elementos de navegación a la izquierda */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+.nav-item {
+    margin-right: 15px; /* Espacio entre los elementos de navegación */
+}
+
+.nav-link {
+    color: #e0f7fa !important; /* Color claro y brillante para el texto */
+    background-color: rgba(52, 152, 219, 0.3); /* Fondo sutil para el efecto de botón */
+    border: 1px solid rgba(52, 152, 219, 0.6); /* Borde más visible */
+    border-radius: 8px; /* Bordes redondeados para los botones */
+    padding: 10px 20px; /* Espaciado interno */
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    font-weight: 600; /* Un poco más de peso para el texto */
+    text-align: center;
+    display: block; /* Asegura que el padding y el ancho funcionen */
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2); /* Sombra más pronunciada para el efecto de botón */
+    text-shadow: 0 0 5px rgba(255,255,255,0.7); /* Sombra de texto para un efecto brillante */
+}
+
+.nav-link:hover {
+    background-color: #3498db; /* Azul vibrante al pasar el ratón */
+    border-color: #3498db; /* Borde azul vibrante al pasar el ratón */
+    color: #ffffff !important; /* Texto blanco al pasar el ratón */
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.6); /* Sombra más pronunciada al pasar el ratón */
+    transform: translateY(-1px); /* Pequeño efecto de elevación */
+    text-shadow: 0 0 8px rgba(255,255,255,0.9); /* Sombra de texto más intensa al pasar el ratón */
+}
+
+.nav-link.active {
+    background-color: #3498db; /* Azul vibrante para el enlace activo */
+    border-color: #3498db; /* Borde azul vibrante para el enlace activo */
+    color: #ffffff !important; /* Color blanco para el enlace activo */
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4); /* Sombra para el activo */
+    text-shadow: none; /* Eliminar sombra de texto en activo si no se desea */
+}
+
+/* Estilos para los títulos principales de las páginas */
+.titulo-gestiona, .titulo-gestion {
+    color: #2c3e50; /* Color oscuro para el título */
+    margin-top: 30px; /* Espacio superior */
+    margin-bottom: 40px; /* Espacio inferior */
+    font-weight: 700; /* Peso de la fuente más fuerte */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Sombra de texto sutil */
+    text-align: center; /* Centrar el texto del título */
+}
+
+/* Estilos para el botón desplegable "Seleccione Datos" */
+.btn-borde-dropdown {
+    border: 2px solid #3498db; /* Borde azul */
+    background-color: #3498db; /* Fondo azul para el botón */
+    color: #ffffff !important; /* Texto blanco para el botón */
+    padding: 12px 25px;
+    border-radius: 0.75rem; /* Bordes redondeados */
+    transition: all 0.3s ease; /* Transición suave */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra más fuerte */
+    font-weight: 600;
+    min-height: 80px; /* Altura mínima para que se vea bien con el botón Cargar Datos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-borde-dropdown:hover {
+    background-color: #2980b9; /* Fondo azul más oscuro al pasar el ratón */
+    border-color: #2980b9; /* Borde azul más oscuro al pasar el ratón */
+    color: #ffffff !important; /* Texto blanco al pasar el ratón */
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4); /* Sombra más pronunciada */
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+
+/* Estilos para el botón "Cargar Datos" (celeste) */
+.btn-borde-celeste {
+    border: 2px solid #add8e6; /* Borde celeste */
+    background-color: #e0f2f7; /* Fondo celeste para el botón */
+    color: #3498db; /* Texto azul para el botón */
+    padding: 12px 25px;
+    border-radius: 0.75rem; /* Bordes redondeados */
+    transition: all 0.3s ease; /* Transición suave */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra más fuerte */
+    font-weight: 600;
+    min-height: 80px; /* Altura mínima para que se vea bien con el selector */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-borde-celeste:hover {
+    background-color: #add8e6; /* Fondo celeste más oscuro al pasar el ratón */
+    border-color: #87ceeb; /* Borde celeste más oscuro al pasar el ratón */
+    color: #2c3e50; /* Texto más oscuro al pasar el ratón */
+    box-shadow: 0 6px 15px rgba(173, 216, 230, 0.6); /* Sombra más pronunciada */
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+
+/* Estilos para la tabla DataTables */
+#tablaDatos {
+    margin-top: 30px; /* Espacio superior para la tabla */
+    border-radius: 0.75rem; /* Bordes más redondeados para la tabla */
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen al contenido */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Sombra más fuerte para la tabla */
+    background-color: #ffffff; /* Fondo blanco para la tabla */
+    border-collapse: separate; /* Necesario para que border-radius funcione en la tabla */
+    border-spacing: 0; /* Eliminar espacio entre celdas */
+}
+
+#tablaDatos thead th {
+    background-color: #3498db; /* Azul vibrante para las cabeceras */
+    color: #ffffff; /* Texto blanco para las cabeceras */
+    border-bottom: 3px solid #2980b9; /* Borde inferior más pronunciado y oscuro */
+    font-weight: bold;
+    padding: 15px 20px;
+    text-align: left;
+    white-space: nowrap; /* Asegura que el texto del título se vea completo */
+}
+
+#tablaDatos tbody tr:nth-child(even) {
+    background-color: #f9fbfd; /* Fondo muy claro para filas pares (efecto cebra) */
+}
+
+#tablaDatos tbody tr:nth-child(odd) {
+    background-color: #eef2f7; /* Fondo ligeramente más oscuro para filas impares */
+}
+
+#tablaDatos tbody tr:hover {
+    background-color: #dbe4ee; /* Fondo al pasar el ratón sobre las filas, más notorio */
+    cursor: pointer; /* Cambiar cursor a puntero */
+}
+
+#tablaDatos tbody td {
+    padding: 12px 20px;
+    vertical-align: middle; /* Alinear contenido de celda al medio */
+    border-top: 1px solid #e9ecef; /* Borde superior para cada celda */
+}
+
+/* Estilos para el paginador y la información de DataTables */
+/* Estos estilos aseguran que 'entries per page' y la paginación se vean bien debajo de la tabla */
+.dataTables_wrapper .dataTables_length, /* Estilo para el selector "Show X entries" */
+.dataTables_wrapper .dataTables_info,  /* Estilo para la información de la tabla */
+.dataTables_wrapper .dataTables_paginate { /* Estilo para los botones de paginación */
+    margin-top: 20px; /* Espacio superior para separarlo de la tabla */
+    text-align: center; /* Centrar el texto y los botones */
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 6px 12px;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #3498db;
+    border-color: #3498db;
+    color: #ffffff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+
+/* Estilos para el formulario de Gestión Usuarios (inicio.html) */
+#formUsuarios {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 0.75rem; /* Bordes redondeados */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Sombra más fuerte para el formulario */
+    margin-top: 30px;
+}
+
+#formUsuarios .form-label {
+    font-weight: bold; /* Nombres de los campos en negrita */
+    margin-bottom: 0.4rem;
+    color: #555;
+}
+
+#formUsuarios .form-control,
+#formUsuarios .form-select {
+    border-radius: 0.5rem; /* Bordes redondeados para inputs y selects */
+    border: 1px solid #b0b0b0;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#formUsuarios .form-control:focus,
+#formUsuarios .form-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+    outline: none;
+}
+
+/* Estilos para los mensajes de validación de Bootstrap */
+.form-control.is-invalid {
+    border-color: #e74c3c; /* Rojo más vibrante para borde de campo inválido */
+    box-shadow: 0 0 0 0.25rem rgba(231, 76, 60, 0.25); /* Sombra roja */
+}
+
+.form-control.is-valid {
+    border-color: #2ecc71; /* Verde más vibrante para borde de campo válido */
+    box-shadow: 0 0 0 0.25rem rgba(46, 204, 113, 0.25); /* Sombra verde */
+}
+
+.invalid-feedback {
+    font-size: 0.9em;
+    color: #e74c3c; /* Color rojo para el texto de error */
+    margin-top: 0.25rem;
+}
+
+/* Estilos para los botones del formulario */
+#btnCancelar, #btnGuardar {
+    padding: 12px 30px;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#btnCancelar {
+    background-color: #95a5a6; /* Color gris suave para Cancelar */
+    border-color: #95a5a6;
+    color: #ffffff;
+}
+
+#btnCancelar:hover {
+    background-color: #7f8c8d;
+    border-color: #7f8c8d;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+#btnGuardar {
+    background-color: #3498db; /* Color azul vibrante para Guardar */
+    border-color: #3498db;
+    color: #ffffff;
+}
+
+#btnGuardar:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
