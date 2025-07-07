@@ -74,7 +74,7 @@ body {
     border-color: #3498db; /* Borde azul vibrante al pasar el ratón */
     color: #ffffff !important; /* Texto blanco al pasar el ratón */
     box-shadow: 0 6px 15px rgba(52, 152, 219, 0.6); /* Sombra más pronunciada al pasar el ratón */
-    transform: translateY(-1px); /* Pequeño efecto de elevación */
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
     text-shadow: 0 0 8px rgba(255,255,255,0.9); /* Sombra de texto más intensa al pasar el ratón */
 }
 

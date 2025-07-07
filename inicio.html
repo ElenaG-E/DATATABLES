@@ -34,26 +34,26 @@
     <div class="container">
         <h1 class="text-center mb-4 titulo-gestion">Gestión Usuarios</h1>
 
-        <form id="formUsuarios">
+        <form id="formUsuarios" novalidate> <!-- Añadido novalidate para controlar la validación con JS -->
             <!-- Fila para Nombre, Usuario, Fecha Ingreso -->
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="inputNombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="inputNombre" placeholder="Ingrese nombre completo">
+                    <input type="text" class="form-control" id="inputNombre" placeholder="Ingrese nombre completo" required>
                     <div class="invalid-feedback" id="feedbackNombre">
                         El Nombre es requerido.
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label for="inputUsuario" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="inputUsuario" placeholder="Ingrese nombre de usuario">
+                    <input type="text" class="form-control" id="inputUsuario" placeholder="Ingrese nombre de usuario" required>
                     <div class="invalid-feedback" id="feedbackUsuario">
                         El Usuario es requerido.
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label for="inputFechaIngreso" class="form-label">Fecha Ingreso</label>
-                    <input type="text" class="form-control" id="inputFechaIngreso" placeholder="dd/MM/yyyy">
+                    <input type="text" class="form-control" id="inputFechaIngreso" placeholder="dd/MM/yyyy" required>
                     <div class="invalid-feedback" id="feedbackFechaIngreso">
                         Fecha de Ingreso requerida y debe tener formato dd/MM/yyyy.
                     </div>
@@ -64,7 +64,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="ejemplo@dominio.com">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="ejemplo@dominio.com" required>
                     <div class="invalid-feedback" id="feedbackEmail">
                         Email requerido y debe tener un formato válido.
                     </div>
@@ -92,6 +92,24 @@
                 </div>
             </div>
         </form>
+    </div>
+
+    <!-- Modal para mensaje de éxito (simulación de envío) -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Envío Exitoso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¡Los datos han sido enviados correctamente! (Simulación)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Inclusión de librerías JavaScript al final del body para mejor rendimiento -->

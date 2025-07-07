@@ -1,103 +1,146 @@
 $(document).ready(function () {
-    // Event listeners
-    $('#formUsuarios').on('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-        validarFormulario();
+
+    // Función para limpiar el formulario
+    function clearForm() {
+        $('#formUsuarios')[0].reset(); // Resetea todos los campos del formulario
+        // Elimina las clases de validación y mensajes de feedback
+        $('.form-control').removeClass('is-invalid is-valid');
+        $('.invalid-feedback').text('');
+    }
+
+    // Función para validar el formato de email
+    function isValidEmail(email) {
+        // Expresión regular para validar el formato de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Función para validar el formato de fecha dd/MM/yyyy
+    function isValidDate(dateString) {
+        // Expresión regular para el formato dd/MM/yyyy
+        const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (!dateRegex.test(dateString)) {
+            return false;
+        }
+
+        const parts = dateString.split('/');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10);
+        const year = parseInt(parts[2], 10);
+
+        // Crea un objeto Date. El mes es 0-indexado en JavaScript (0 para Enero, 11 para Diciembre)
+        const date = new Date(year, month - 1, day);
+
+        // Comprueba si los valores de día, mes y año coinciden con los de la fecha creada
+        // Esto valida si la fecha es real (ej. no 31 de Febrero)
+        return date.getFullYear() === year &&
+               date.getMonth() === month - 1 &&
+               date.getDate() === day;
+    }
+
+    // Función para validar todos los campos del formulario
+    function validateForm() {
+        let isValid = true; // Bandera para saber si todo el formulario es válido
+
+        // Validar Nombre
+        const inputNombre = $('#inputNombre');
+        const feedbackNombre = $('#feedbackNombre');
+        if (inputNombre.val().trim() === '') {
+            inputNombre.addClass('is-invalid').removeClass('is-valid');
+            feedbackNombre.text('El Nombre es requerido.');
+            isValid = false;
+        } else {
+            inputNombre.addClass('is-valid').removeClass('is-invalid');
+            feedbackNombre.text('');
+        }
+
+        // Validar Usuario
+        const inputUsuario = $('#inputUsuario');
+        const feedbackUsuario = $('#feedbackUsuario');
+        if (inputUsuario.val().trim() === '') {
+            inputUsuario.addClass('is-invalid').removeClass('is-valid');
+            feedbackUsuario.text('El Usuario es requerido.');
+            isValid = false;
+        } else {
+            inputUsuario.addClass('is-valid').removeClass('is-invalid');
+            feedbackUsuario.text('');
+        }
+
+        // Validar Fecha Ingreso
+        const inputFechaIngreso = $('#inputFechaIngreso');
+        const feedbackFechaIngreso = $('#feedbackFechaIngreso');
+        if (inputFechaIngreso.val().trim() === '') {
+            inputFechaIngreso.addClass('is-invalid').removeClass('is-valid');
+            feedbackFechaIngreso.text('La Fecha de Ingreso es requerida.');
+            isValid = false;
+        } else if (!isValidDate(inputFechaIngreso.val().trim())) {
+            inputFechaIngreso.addClass('is-invalid').removeClass('is-valid');
+            feedbackFechaIngreso.text('Formato de fecha inválido. Use dd/MM/yyyy.');
+            isValid = false;
+        } else {
+            inputFechaIngreso.addClass('is-valid').removeClass('is-invalid');
+            feedbackFechaIngreso.text('');
+        }
+
+        // Validar Email
+        const inputEmail = $('#inputEmail');
+        const feedbackEmail = $('#feedbackEmail');
+        if (inputEmail.val().trim() === '') {
+            inputEmail.addClass('is-invalid').removeClass('is-valid');
+            feedbackEmail.text('El Email es requerido.');
+            isValid = false;
+        } else if (!isValidEmail(inputEmail.val().trim())) {
+            inputEmail.addClass('is-invalid').removeClass('is-valid');
+            feedbackEmail.text('Formato de email inválido.');
+            isValid = false;
+        } else {
+            inputEmail.addClass('is-valid').removeClass('is-invalid');
+            feedbackEmail.text('');
+        }
+
+        // Género y Sitio Web no requieren validación de contenido, solo se pueden marcar como válidos si se desea
+        // const inputSitioWeb = $('#inputSitioWeb');
+        // if (inputSitioWeb.val().trim() !== '') {
+        //     inputSitioWeb.addClass('is-valid').removeClass('is-invalid');
+        // } else {
+        //     inputSitioWeb.removeClass('is-valid is-invalid');
+        // }
+
+        // const selectGenero = $('#selectGenero');
+        // if (selectGenero.val() !== '') {
+        //     selectGenero.addClass('is-valid').removeClass('is-invalid');
+        // } else {
+        //     selectGenero.removeClass('is-valid is-invalid');
+        // }
+
+
+        return isValid;
+    }
+
+    // Evento para el botón Cancelar
+    $('#btnCancelar').on('click', function() {
+        clearForm();
     });
 
-    $('#inputNombre').on('input', function() { validarCampo($(this), validarNombre, 'El Nombre es requerido.'); });
-    $('#inputUsuario').on('input', function() { validarCampo($(this), validarUsuario, 'El Usuario es requerido.'); });
-    $('#inputEmail').on('input', function() { validarCampo($(this), validarEmail, 'Email requerido y debe tener un formato válido.'); });
-    $('#inputFechaIngreso').on('input', function() { validarCampo($(this), validarFechaIngreso, 'Fecha de Ingreso requerida y debe tener formato dd/MM/yyyy.'); });
+    // Evento para el envío del formulario (botón Guardar)
+    $('#formUsuarios').on('submit', function(event) {
+        event.preventDefault(); // Evita el envío por defecto del formulario
 
-    $('#btnCancelar').on('click', limpiarFormulario); // 
+        if (validateForm()) {
+            // Si el formulario es válido, simula el envío de datos
+            // Muestra el modal de éxito
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            clearForm(); // Limpia el formulario después de la simulación de envío exitoso
+        } else {
+            console.log('Formulario inválido. Por favor, corrige los errores.');
+            // Opcional: podrías mostrar un mensaje de error general si el formulario es inválido
+        }
+    });
 
-    // Initialize date picker if you decide to use jQuery UI DatePicker (optional)
-    // For this example, we'll just use a text input and validate string.
-    // If you want to use DatePicker, you would include its CSS and JS and uncomment below:
-    // $('#inputFechaIngreso').datepicker({
-    //     dateFormat: 'dd/mm/yy',
-    //     onSelect: function() {
-    //         validarCampo($(this), validarFechaIngreso, 'Fecha de Ingreso requerida y debe tener formato dd/MM/yyyy.');
-    //     }
-    // });
+    // Añadir validación en tiempo real al escribir o cambiar campos
+    $('#inputNombre, #inputUsuario, #inputFechaIngreso, #inputEmail').on('input change', function() {
+        // Vuelve a validar el campo específico para actualizar su estado
+        validateForm(); // Llama a la validación completa para actualizar todos los estados
+    });
 });
-
-// Function to validate the entire form 
-function validarFormulario() {
-    let isValid = true;
-
-    isValid = validarCampo($('#inputNombre'), validarNombre, 'El Nombre es requerido.') && isValid;
-    isValid = validarCampo($('#inputUsuario'), validarUsuario, 'El Usuario es requerido.') && isValid;
-    isValid = validarCampo($('#inputEmail'), validarEmail, 'Email requerido y debe tener un formato válido.') && isValid;
-    isValid = validarCampo($('#inputFechaIngreso'), validarFechaIngreso, 'Fecha de Ingreso requerida y debe tener formato dd/MM/yyyy.') && isValid;
-    // Gender and Website are not required, so no validation needed for them here.
-
-    if (isValid) {
-        // Simulate data submission 
-        alert('Datos de usuario guardados correctamente (simulado).');
-        // Optionally, clear the form after successful "submission"
-        limpiarFormulario();
-    } else {
-        alert('Por favor, corrige los errores en el formulario.');
-    }
-}
-
-// Helper function to apply/remove validation styles and messages 
-function validarCampo(element, validationFunction, errorMessage) {
-    const feedbackElement = element.next('.invalid-feedback'); // Assumes feedback is immediately after the input
-    if (validationFunction(element.val())) {
-        element.removeClass('is-invalid').addClass('is-valid');
-        feedbackElement.text(''); // Clear previous error message
-        return true;
-    } else {
-        element.removeClass('is-valid').addClass('is-invalid');
-        feedbackElement.text(errorMessage);
-        return false;
-    }
-}
-
-// Validation functions [cite: 95, 96, 97, 98]
-function validarNombre(nombre) {
-    return nombre.trim() !== ''; // Required 
-}
-
-function validarUsuario(usuario) {
-    return usuario.trim() !== ''; // Required 
-}
-
-function validarFechaIngreso(fecha) {
-    // Required, format "dd/MM/yyyy" 
-    if (fecha.trim() === '') {
-        return false;
-    }
-    const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-    if (!regex.test(fecha)) {
-        return false;
-    }
-    // Optional: Further date validity check (e.g., valid day for month)
-    const parts = fecha.split('/');
-    const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10);
-    const year = parseInt(parts[2], 10);
-    const date = new Date(year, month - 1, day);
-    return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
-}
-
-function validarEmail(email) {
-    // Required, valid email structure 
-    if (email.trim() === '') {
-        return false;
-    }
-    // Basic email regex (can be made more robust if needed)
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-}
-
-// Function to clear the form fields 
-function limpiarFormulario() {
-    $('#formUsuarios')[0].reset(); // Resets all form fields
-    $('#formUsuarios input').removeClass('is-invalid is-valid'); // Clear validation styles
-    $('#formUsuarios select').removeClass('is-invalid is-valid'); // Clear validation styles for select
-    $('.invalid-feedback').text(''); // Clear all error messages
-}
